@@ -6,3 +6,7 @@ This is Melonloader Bootstrap that can load Melonloader into VRChat with the Ele
 
 # NOT WORKING
 Due to the Nature of the Injector that Inject the .dll not at startup but sometimes random, the ML Bootstrap dont work.
+
+
+# TODO
+- Fix ImGui Console (VRC dont allow any external console anymore)
