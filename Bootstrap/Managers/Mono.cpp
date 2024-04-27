@@ -426,7 +426,7 @@ Mono::Domain* Mono::Hooks::mono_jit_init_version(const char* name, const char* v
 {
 	Console::SetHandles();
 	Debug::Msg("Detaching Hook from mono_jit_init_version...");
-	Hook::Detach((void**)&mono_jit_init_version);
+	Hook::Detach(&(LPVOID&)Exports::mono_jit_init_version, mono_jit_init_version);
 
 	if (Debug::Enabled)
 	{
@@ -479,7 +479,7 @@ Mono::Object* Mono::Hooks::mono_runtime_invoke(Method* method, Object* obj, void
 			|| (strstr(method_name, "DoSendMouseEvents") != NULL))))
 	{
 		Debug::Msg("Detaching Hook from mono_runtime_invoke...");
-		Hook::Detach((void**)&mono_runtime_invoke);
+		Hook::Detach(&(LPVOID&)Exports::mono_runtime_invoke,&mono_runtime_invoke);
 		if (BaseAssembly::PreStart())
 			BaseAssembly::Start();
 	}

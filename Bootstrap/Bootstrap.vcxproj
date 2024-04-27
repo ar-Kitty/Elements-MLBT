@@ -98,8 +98,8 @@
     <VcpkgUseMD>true</VcpkgUseMD>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <VcpkgUseStatic>false</VcpkgUseStatic>
-    <VcpkgUseMD>true</VcpkgUseMD>
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+    <VcpkgUseMD>false</VcpkgUseMD>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -191,7 +191,13 @@
     <ClInclude Include="Base\MSDetours\detours.h" />
     <ClInclude Include="Base\MSDetours\detours.x64.h" />
     <ClInclude Include="Base\MSDetours\detours.x86.h" />
+    <ClInclude Include="Console.hpp" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="D3D11Window.hpp" />
+    <ClInclude Include="Game.hpp" />
+    <ClInclude Include="helper.h" />
+    <ClInclude Include="Hooking.hpp" />
+    <ClInclude Include="initialize.hpp" />
     <ClInclude Include="Managers\AssemblyVerifier.h" />
     <ClInclude Include="Managers\BaseAssembly.h" />
     <ClInclude Include="Managers\Game.h" />
@@ -200,6 +206,7 @@
     <ClInclude Include="Managers\InternalCalls.h" />
     <ClInclude Include="Managers\Mono.h" />
     <ClInclude Include="Base\resource.h" />
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Utils\AnalyticsBlocker.h" />
     <ClInclude Include="Utils\Il2CppAssemblyGenerator.h" />
     <ClInclude Include="Utils\Assertion.h" />

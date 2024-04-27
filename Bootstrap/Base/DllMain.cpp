@@ -5,14 +5,18 @@
 #include <functional>
 #include <thread>
 #include "../Addons/lazyimporter/lazyimporter.h"
+#include ""
 
 HWND VRCWindow = nullptr;
 HINSTANCE mhinstDLL = nullptr;
+LPVOID Data = nullptr;
+
 
 static uintptr_t __cdecl I_beginthreadex(void* _Security, unsigned _StackSize, _beginthreadex_proc_type _StartAddress, void* _ArgList, unsigned _InitFlag, unsigned* _ThrdAddr) {
 	return iat(_beginthreadex).get()(_Security, _StackSize, _StartAddress, _ArgList, _InitFlag, _ThrdAddr);
 }
 
+extern DWORD WINAPI MainThread_Initialize(LPVOID dwModule);
 
 #define IATHookThread(mainThread, dllhandle) I_beginthreadex(0, 0, (_beginthreadex_proc_type)mainThread, dllhandle, 0, 0);
 
@@ -38,6 +42,8 @@ void Checkprocess() {
 
     DisableThreadLibraryCalls(mhinstDLL);
     Core::Initialize(mhinstDLL);
+    MainThread_Initialize(Data);
+
 }
 
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
@@ -46,6 +52,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     if (fdwReason == 1) { // Process Attach
         if (isCurrentProcessVRChat()) {
             mhinstDLL = hinstDLL;
+            Data = lpvReserved;
             DisableThreadLibraryCalls(hinstDLL);
             IATHookThread(Checkprocess, hinstDLL); //If not VRChat he does Nothing at all :)
         }

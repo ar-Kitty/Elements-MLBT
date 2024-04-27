@@ -72,6 +72,12 @@
     <Filter Include="Base\MSDetours">
       <UniqueIdentifier>{a8ba5734-c9ac-4a6e-9e6b-54adb361cf32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base\imguishit">
+      <UniqueIdentifier>{034222d1-b61c-4041-84bd-d00b92b560dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\imguishit\include">
+      <UniqueIdentifier>{1f982386-232c-48e8-96a2-16dbd7926b00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utils\CommandLine.h">
@@ -141,6 +147,27 @@
     <ClInclude Include="Utils\Logging\Logger.h" />
     <ClInclude Include="Utils\Logging\Log.h" />
     <ClInclude Include="Addons\lazyimporter\lazyimporter.h" />
+    <ClInclude Include="initialize.hpp">
+      <Filter>Base\imguishit</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.hpp">
+      <Filter>Base\imguishit\include</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>Base\imguishit\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Base\imguishit\include</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D11Window.hpp">
+      <Filter>Base\imguishit\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooking.hpp">
+      <Filter>Base\imguishit\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.hpp">
+      <Filter>Base\imguishit\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Base\Bootstrap.rc">

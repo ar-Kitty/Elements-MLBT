@@ -4,31 +4,27 @@
 
 void Hook::Attach(void** target, void* detour)
 {
-    HOOK_TRACE_INFO hHook = { NULL }; 
-    NTSTATUS result = LhInstallHook(
-        target,                
-        detour,                
-        nullptr,               
-        &hHook               
-    );
 
-    if (FAILED(result)) {
-        Debug::Msg("Failed to install hook.");
+    if (MH_Initialize() != MH_OK) {
+        Debug::Msg("Failed to initialize MinHook.");
         return;
     }
-
-    result = LhSetExclusiveACL(new ULONG[1]{ 0 }, 1, &hHook);
-    if (FAILED(result)) {
+    if (MH_CreateHook(target, detour, reinterpret_cast<void**>(target)) != MH_OK) {
+        Debug::Msg("Failed to create hook.");
+        return;
+    }
+    if (MH_EnableHook(target) != MH_OK) {
         Debug::Msg("Failed to enable hook.");
     }
 }
 
-void Hook::Detach(void** target)
+void Hook::Detach(void** target, void* detour)
 {
-    HOOK_TRACE_INFO hHook = { NULL }; 
-    NTSTATUS result = LhUninstallHook(&hHook);
-    if (FAILED(result)) {
-        Debug::Msg("Failed to uninstall hook.");
+    if (MH_DisableHook(target) != MH_OK) {
+        Debug::Msg("Failed to disable hook.");
     }
-    LhWaitForPendingRemovals();
+    if (MH_RemoveHook(target) != MH_OK) {
+        Debug::Msg("Failed to remove hook.");
+    }
+    MH_Uninitialize();
 }

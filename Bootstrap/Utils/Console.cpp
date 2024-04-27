@@ -29,55 +29,6 @@ bool Console::Initialize()
 	if (!Debug::Enabled && ShouldHide)
 		return true;
 
-	if (!AllocConsole())
-	{
-		Assertion::ThrowInternalFailure("Failed to Allocate Console!");
-		return false;
-	}
-
-	Window = GetConsoleWindow();
-	Menu = GetSystemMenu(Window, FALSE);
-
-	SetConsoleCtrlHandler(EventHandler, TRUE);
-	SetDefaultTitle();
-	SetForegroundWindow(Window);
-
-	if (AlwaysOnTop)
-		SetWindowPos(Window, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
-
-	freopen_s(reinterpret_cast<FILE**>(stdin), "CONIN$", "r", stdin);
-	freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
-	freopen_s(reinterpret_cast<FILE**>(stderr), "CONOUT$", "w", stderr);
-	InputHandle = GetStdHandle(STD_INPUT_HANDLE);
-	OutputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetHandles();
-
-	DWORD mode = 0;
-	GetConsoleMode(OutputHandle, &mode);
-	
-	if (Core::IsRunningInWine())
-		UseLegacyColoring = true;
-
-	mode |= (ENABLE_LINE_INPUT | ENABLE_PROCESSED_INPUT);
-	if (!SetConsoleMode(OutputHandle, mode))
-	{
-		UseLegacyColoring = true;
-		mode &= ~(ENABLE_LINE_INPUT | ENABLE_PROCESSED_INPUT);
-	}
-	else
-	{
-		mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-		if (!SetConsoleMode(OutputHandle, mode))
-		{
-			UseLegacyColoring = true;
-			mode &= ~ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-		}
-	}
-
-	mode |= ENABLE_EXTENDED_FLAGS;
-	mode &= ~(ENABLE_MOUSE_INPUT | ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE);
-	SetConsoleMode(OutputHandle, mode);
-
 	return true;
 }
 
