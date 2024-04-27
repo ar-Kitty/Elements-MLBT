@@ -49,7 +49,7 @@ Il2Cpp::Domain* Il2Cpp::Hooks::il2cpp_init(const char* name)
 {
 	Console::SetHandles();
 	Debug::Msg("Detaching Hook from il2cpp_init...");
-	Hook::Detach(&(LPVOID&)Exports::il2cpp_init, il2cpp_init);
+	Hook::Detach((void**)&il2cpp_init);
 	Mono::CreateDomain(name);
 	InternalCalls::Initialize();
 	// todo: check if it works/is necessary on mono games
@@ -70,7 +70,7 @@ Il2Cpp::Object* Il2Cpp::Hooks::il2cpp_runtime_invoke(Method* method, Object* obj
 	if (strstr(method_name, "Internal_ActiveSceneChanged") != NULL)
 	{
 		Debug::Msg("Detaching Hook from il2cpp_runtime_invoke...");
-		Hook::Detach(&(LPVOID&)Exports::il2cpp_runtime_invoke, il2cpp_runtime_invoke);
+		Hook::Detach((void**)&il2cpp_runtime_invoke);
 		if (BaseAssembly::PreStart())
 			BaseAssembly::Start();
 	}

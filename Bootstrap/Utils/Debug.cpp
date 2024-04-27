@@ -2,7 +2,7 @@
 #include "Logging/Logger.h"
 #include "Assertion.h"
 
-bool Debug::Enabled = false;
+bool Debug::Enabled = true;
 
 void Debug::Msg(const char* txt)
 {
