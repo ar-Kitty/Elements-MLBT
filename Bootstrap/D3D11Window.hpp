@@ -1,10 +1,11 @@
-#pragma once
 #include "helper.h"
 #include "Console.hpp"
 #include "Game.hpp"
 #include "Hooking.hpp"
 #include "Menu.hpp"
 #include <memory>
+
+
 namespace DX11_Base
 {
 

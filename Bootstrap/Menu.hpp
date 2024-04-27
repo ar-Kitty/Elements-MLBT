@@ -1,7 +1,8 @@
-#pragma once
+#include <memory>
 #include "helper.h"
 #include "Game.hpp"
-#include "D3D11Window.hpp"
+
+
 namespace DX11_Base {
 	class Menu
 	{

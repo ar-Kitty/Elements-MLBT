@@ -1,28 +1,26 @@
-#pragma once
 #include "helper.h"
 #include "Console.hpp"
 #include "Game.hpp"
-#include "D3D11Window.hpp"
 #include <memory>
 
 namespace DX11_Base {
 
-	class Hooking
+	class Hooking2
 	{
 	public:
-		void						Hook();
-		void						Unhook();
+		void						Hook2();
+		void						Unhook2();
 
 	public:
-		explicit Hooking();
-		~Hooking() noexcept;
-		Hooking(Hooking const&) = delete;
-		Hooking(Hooking&&) = delete;
-		Hooking& operator=(Hooking const&) = delete;
-		Hooking& operator=(Hooking&&) = delete;
+		explicit Hooking2();
+		~Hooking2() noexcept;
+		Hooking2(Hooking2 const&) = delete;
+		Hooking2(Hooking2&&) = delete;
+		Hooking2& operator=(Hooking2 const&) = delete;
+		Hooking2& operator=(Hooking2&&) = delete;
 
 	};
 
-	inline std::unique_ptr<Hooking> g_Hooking;
+	inline std::unique_ptr<Hooking2> g_Hooking;
 	
 }

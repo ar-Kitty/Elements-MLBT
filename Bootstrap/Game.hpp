@@ -1,6 +1,11 @@
-#pragma once
+
 #include "helper.h"
 #include "Console.hpp"
+#include <atomic>
+#include <chrono>
+#include <d3d11.h>
+#include <wtypes.h>
+#include <memory>
 
 namespace DX11_Base
 {

@@ -1,4 +1,3 @@
-#pragma once
 #include "helper.h"
 
 namespace DX11_Base
